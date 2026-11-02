@@ -19,7 +19,7 @@
 
 from os.path import dirname, join
 from typing import Dict
-from pkg_resources import get_distribution
+from importlib.metadata import version
 
 from predeployed_generator.upgradeable_contract_generator import UpgradeableContractGenerator
 from predeployed_generator.openzeppelin.access_control_enumerable_generator \
@@ -103,7 +103,7 @@ class ConfigControllerGenerator(AccessControlEnumerableGenerator):
         cls._setup_role(storage, roles_slots, cls.DEPLOYER_ROLE, [schain_owner])
         cls._setup_role_admin(storage, roles_slots, cls.DEPLOYER_ROLE, cls.DEPLOYER_ADMIN_ROLE)
         cls._write_string(storage, cls.VERSION_SLOT,
-                          get_distribution('config_controller_predeployed').version)
+                          version('config_controller_predeployed'))
         return storage
 
 
